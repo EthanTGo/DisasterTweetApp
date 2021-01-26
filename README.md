@@ -19,6 +19,35 @@ the dataset folder. You would need to run the following commands:
 
 The first command creates a new database name DisasterResponse.db under the data folder. The name is important and if you choose to create one with a different name, you would need to update the file using the database in models/train_classifiers.py. 
 
-The second command
+The second command creates a new model based of a pipeline. The default model consists of a basic pipeline that uses CountVectorizer, TfidfTransformer and RandomForest. When naming the file it's important to keep the same name or you will need to change the name of the fill in the front end. 
 
+# File structure
+
+The file is structured into the following hierarchies
+
+```
+dataset
+└── categories.csv
+└── messages.csv
+└── process_data.py
+└── DisasterResponse.db
+notebook
+└── ETL Pipeline.ipynb
+└── ML Pipeline.ipyn
+model
+└── train_classifier.py
+└── classifier.pkl
+app
+└── run.py
+└── templates
+    └── go.html
+    └── master.html
+```
+Here, the notebook contains the development environment where the function of the codes with in train_classifier.py and process_data.py is first designed. Looking at the notebook will give an easier and intuitive understanding on hoe the dataset was extracted and transformed. It also shows how the model was designed.
+
+The app folder contains the Flask file that runs the web applications
+
+The model contains the train_classifier.py which is used to create classifier.pkl. This is the pickle file used for the web application
+
+The dataset contains the original training/testing datasets and database produced through the process_data.py
 
