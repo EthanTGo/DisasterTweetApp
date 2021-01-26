@@ -3,10 +3,20 @@ This is a disaster tweet classification pipeline project that utilizes NLP. The 
 
 # How to run
 
-After download/cloning the project, you only need to navigate to the app directory and run the following command:
+After download/cloning the project, you need to navigate to the app directory and run the following command:
+- `pip install`
+
+Then navigate up back to the main folder and run this command
+- `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
+
+Finally, cd back to the app folder and run
 - `python run.py`
 
-By default, it should be set to port 3001. This can be changed in the run.py file under the function main.
+The first command installs the requirements.txt file which includes the require libraries.
+
+The second command creates the pkl file used to train the model. Since the pkl file would be at least 1 GB it would be too large to be stored in Github and has to be run manually.
+
+The final command runs the web app. By default, it should be set to port 3001. This can be changed in the run.py file under the function main.
 
 # Updating the database or model
 
@@ -26,10 +36,10 @@ The second command creates a new model based of a pipeline. The default model co
 The file is structured into the following hierarchies
 
 ```
-dataset
+data
 └── categories.csv
-└── messages.csv
-└── process_data.py
+└── disaster_messages.csv
+└── disaster_process_data.py
 └── DisasterResponse.db
 notebook
 └── ETL Pipeline.ipynb
