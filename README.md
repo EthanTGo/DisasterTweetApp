@@ -17,3 +17,8 @@ the dataset folder. You would need to run the following commands:
 - `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
 - `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
 
+The first command creates a new database name DisasterResponse.db under the data folder. The name is important and if you choose to create one with a different name, you would need to update the file using the database in models/train_classifiers.py. 
+
+The second command
+
+
