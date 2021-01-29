@@ -56,7 +56,7 @@ def save_data(df, database_filename):
     Input: (DataFrame) df. The dataframe that will be saved as a table into a sqlite database
            (String) database_filename. The name of the database
     '''
-    engine = create_engine('sqlite:///' + database_filename)
+    engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('df', engine, index=False, if_exists = 'replace')
 
 

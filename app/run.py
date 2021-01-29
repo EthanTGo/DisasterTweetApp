@@ -63,6 +63,24 @@ def index():
                     'title': "Genre"
                 }
             }
+        },
+                {
+            'data': [
+                Bar(
+                    x=df.iloc[:, 4:].columns,
+                    y=df.iloc[:, 4:].sum()
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Categories"
+                }
+            }
         }
     ]
     

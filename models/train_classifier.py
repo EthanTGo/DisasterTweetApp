@@ -20,7 +20,7 @@ from sklearn.metrics import classification_report
 import pickle
 
 
-def load_data(database_filepath, table_name = 'df', column_name = message):
+def load_data(database_filepath, table_name = 'df', column_name = 'message'):
     '''
     Function that is used to load the data from a database
 
@@ -30,11 +30,12 @@ def load_data(database_filepath, table_name = 'df', column_name = message):
             due to the nature of the data
             category_names = names of the categories
     '''
-    engine = create_engine(database_filepath)
+    print(database_filepath)
+    engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table(table_name,engine)
     X = df[column_name].values
     Y = df.iloc[:, 4:].values
-    categories = Y.columns.tolist()
+    categories = df.iloc[:, 4:].columns.tolist()
     return X,Y,categories
 
 def tokenize(text):
@@ -50,9 +51,9 @@ def tokenize(text):
     for tok in token:
         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
         clean_tokens.append(clean_tok)
-
+    
     return clean_tokens
-​
+
 
 def build_model():
     '''
@@ -65,7 +66,12 @@ def build_model():
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
-    return pipeline
+    parameters = {
+    'tfidf__smooth_idf': [False, True],
+    'clf__estimator__n_estimators': [1,10,20,30],
+    'clf__estimator__n_jobs': [1,2,3],}
+    cv = GridSearchCV(pipeline, param_grid = parameters)
+    return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
     '''
